@@ -1,16 +1,33 @@
-import { Link } from 'react-router-dom';
+import {  NavLink } from 'react-router-dom';
 import './Header.scss'
 const Header = () => {
+
+const navArray = [
+  {
+     path : '/home',
+     name : 'Home',
+  },
+  {
+    path : '/show',
+    name : 'Main',
+ }
+];
+
+const allLinks = navArray.map((linkObj: any)=>{
+  return <li>
+  <NavLink to={linkObj.path} className={({isActive})=>{
+
+   return isActive ? "active-class" : '';
+
+       }}> {linkObj.name} </NavLink>
+</li>
+})
+
     return (
       <div>   
 <ul>
   
-<li>
-            <Link to='/' > home </Link>
-        </li>
-        <li>
-           <Link to='/show'> Main </Link>   
-        </li>
+   {allLinks}
 
 </ul>
       

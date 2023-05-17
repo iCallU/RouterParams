@@ -10,10 +10,10 @@ const EditHealthData = () => {
     console.table(parms)
     const {users, dispatchFun} = useContext(HealthDataContext);
    
-    const [ userData, setUserData ] = useState<stateType>(initalState[0]);
+    const [ userData, setUserData ] = useState<any>(initalState[0]);
     
     useEffect(() => {
-        if(parms.userId){
+        if(parms.userId){ 
             users.forEach(user=> {
                 if(user.id === parseInt(parms.userId)){
                  setUserData(user)
@@ -31,62 +31,28 @@ const EditHealthData = () => {
         setUserData(newUserData)
         const action = {
             type: 'UPDATE_USER_DATA',
-            userData:userData
+            userData : userData
         }
         dispatchFun(action)
     }
 
-    const onChangeBP = (e:any) => {
+    const onChangeHealthData = (value: any, healthName: any) => {
+        console.log('healthName', healthName)
         // console.log('e.name', e.target.value);
-        const newBP = {...userData.BP, value: e.target.value};
-        const newUserData = {...userData, BP: newBP};
+        const newBP = {...userData[healthName], value: value};
+        const newUserData = {...userData, [healthName]: newBP};
         setUserData(newUserData)
-       
-    }
-    const onChangeSBP = (e:any) => {
-        // console.log('e.name', e.target.value);
-        const newSBP = {...userData.SBP, value: e.target.value};
-        const newUserData = {...userData, SBP: newSBP};
-        setUserData(newUserData)
-       
-    }
-    const onChangeDBP = (e:any) => {
-        // console.log('e.name', e.target.value);
-        const newDBP = {...userData.DBP, value: e.target.value};
-        const newUserData = {...userData, DBP: newDBP};
-        setUserData(newUserData)
-       
-    }
-    const onChangePR = (e:any) => {
-        // console.log('e.name', e.target.value);
-        const newPR = {...userData.PR, value: e.target.value};
-        const newUserData = {...userData, PR: newPR};
-        setUserData(newUserData)
-       
-    }
-    const onChangeHR = (e:any) => {
-        // console.log('e.name', e.target.value);
-        const newHR = {...userData.HR, value: e.target.value};
-        const newUserData = {...userData, HR: newHR};
-        setUserData(newUserData)
-       
-    }
-    const onChangeSR = (e:any) => {
-        // console.log('e.name', e.target.value);
-        const newSR = {...userData.SR, value: e.target.value};
-        const newUserData = {...userData, SR: newSR};
-        setUserData(newUserData)
-       
-    }
-
-    // const submitdAta = () => {
+        }
         
-    //     const action = {
-    //         type: 'UPDATE_USER_DATA',
-    //         userData:userData
-    //     }
-    //     dispatchFun(action)
-    // }
+     
+    const submitData = () => {
+        
+        const action = {
+            type: 'UPDATE_USER_DATA',
+            userData:userData
+        }
+        dispatchFun(action)
+    }
 
     return (
         <div>
@@ -112,7 +78,7 @@ placeholder="name" />
 <input 
     type="number" 
     value={userData.BP.value}
-    onChange={onChangeBP}
+    onChange={(e)=>onChangeHealthData(e.target.value,'BP')}
     id="bp"
     placeholder={userData.BP.name} />
     
@@ -123,7 +89,7 @@ placeholder="name" />
 <input 
     type="number" 
     value={userData.HR.value}
-    onChange={onChangeHR}
+    onChange={(e)=>onChangeHealthData(e.target.value,'HR')}
     id="HR"
     placeholder={userData.HR.name} />
     
@@ -135,7 +101,7 @@ placeholder="name" />
 <input 
     type="number" 
     value={userData.SBP.value}
-    onChange={onChangeSBP}
+    onChange={(e)=>onChangeHealthData(e.target.value,'SBP')}
     id="SBP"
     placeholder={userData.SBP.name} />
     
@@ -149,7 +115,7 @@ placeholder="name" />
 <input 
     type="number" 
     value={userData.DBP.value}
-    onChange={onChangeDBP}
+    onChange={(e)=>onChangeHealthData(e.target.value,'DBP')}
     id="DBP"
     placeholder={userData.DBP.name} />
     
@@ -160,7 +126,7 @@ placeholder="name" />
 <input 
     type="number" 
     value={userData.PR.value}
-    onChange={onChangePR}
+    onChange={(e)=>onChangeHealthData(e.target.value,'PR')}
     id="PR"
     placeholder={userData.PR.name} />
     
@@ -171,14 +137,17 @@ placeholder="name" />
 <input 
     type="number" 
     value={userData.SR.value}
-    onChange={onChangeSR}
+    onChange={(e)=>onChangeHealthData(e.target.value,'SR')}
     id="SR"
     placeholder={userData.SR.name} />
     
 </div>
+
+<button onClick={submitData} type="button"> Submit </button>
+
 </form>
 
-
+ 
         </div>
     )
 };
