@@ -15,13 +15,13 @@ const EditHealthData = () => {
     useEffect(() => {
         if(parms.userId){
             users.forEach(user=> {
-                if(user.id == parseInt(parms.userId)){
+                if(user.id === parseInt(parms.userId)){
                  setUserData(user)
                 }
              })
         }
         console.log('userData',userData)
-    },[parms])
+    },[parms]);
   
 
 
@@ -43,15 +43,50 @@ const EditHealthData = () => {
         setUserData(newUserData)
        
     }
-
-    const submitdAta = () => {
-        
-        const action = {
-            type: 'UPDATE_USER_DATA',
-            userData:userData
-        }
-        dispatchFun(action)
+    const onChangeSBP = (e:any) => {
+        // console.log('e.name', e.target.value);
+        const newSBP = {...userData.SBP, value: e.target.value};
+        const newUserData = {...userData, SBP: newSBP};
+        setUserData(newUserData)
+       
     }
+    const onChangeDBP = (e:any) => {
+        // console.log('e.name', e.target.value);
+        const newDBP = {...userData.DBP, value: e.target.value};
+        const newUserData = {...userData, DBP: newDBP};
+        setUserData(newUserData)
+       
+    }
+    const onChangePR = (e:any) => {
+        // console.log('e.name', e.target.value);
+        const newPR = {...userData.PR, value: e.target.value};
+        const newUserData = {...userData, PR: newPR};
+        setUserData(newUserData)
+       
+    }
+    const onChangeHR = (e:any) => {
+        // console.log('e.name', e.target.value);
+        const newHR = {...userData.HR, value: e.target.value};
+        const newUserData = {...userData, HR: newHR};
+        setUserData(newUserData)
+       
+    }
+    const onChangeSR = (e:any) => {
+        // console.log('e.name', e.target.value);
+        const newSR = {...userData.SR, value: e.target.value};
+        const newUserData = {...userData, SR: newSR};
+        setUserData(newUserData)
+       
+    }
+
+    // const submitdAta = () => {
+        
+    //     const action = {
+    //         type: 'UPDATE_USER_DATA',
+    //         userData:userData
+    //     }
+    //     dispatchFun(action)
+    // }
 
     return (
         <div>
@@ -88,7 +123,7 @@ placeholder="name" />
 <input 
     type="number" 
     value={userData.HR.value}
-    onChange={onChangeBP}
+    onChange={onChangeHR}
     id="HR"
     placeholder={userData.HR.name} />
     
@@ -100,30 +135,21 @@ placeholder="name" />
 <input 
     type="number" 
     value={userData.SBP.value}
-    onChange={onChangeBP}
+    onChange={onChangeSBP}
     id="SBP"
     placeholder={userData.SBP.name} />
     
 </div>
 
 
-<div className={styless['form-control']}>
-    <label htmlFor="DBP">{userData.DBP.name}</label>
-<input 
-    type="number" 
-    value={userData.DBP.value}
-    onChange={onChangeBP}
-    id="DBP"
-    placeholder={userData.DBP.name} />
-    
-</div>
+
 
 <div className={styless['form-control']}>
     <label htmlFor="DBP">{userData.DBP.name}</label>
 <input 
     type="number" 
     value={userData.DBP.value}
-    onChange={onChangeBP}
+    onChange={onChangeDBP}
     id="DBP"
     placeholder={userData.DBP.name} />
     
@@ -134,7 +160,7 @@ placeholder="name" />
 <input 
     type="number" 
     value={userData.PR.value}
-    onChange={onChangeBP}
+    onChange={onChangePR}
     id="PR"
     placeholder={userData.PR.name} />
     
@@ -145,7 +171,7 @@ placeholder="name" />
 <input 
     type="number" 
     value={userData.SR.value}
-    onChange={onChangeBP}
+    onChange={onChangeSR}
     id="SR"
     placeholder={userData.SR.name} />
     
